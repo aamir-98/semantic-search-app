@@ -5,6 +5,8 @@ nltk.download('punkt')
 nltk.download('punkt_tab')
 nltk.download('stopwords')
 from nltk.corpus import reuters, stopwords
+from nltk.corpus import reuters
+nltk.data.path.append("/tmp")
 from nltk.tokenize import word_tokenize
 from gensim.models import Word2Vec
 from scipy.spatial.distance import cosine
