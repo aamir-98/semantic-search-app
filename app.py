@@ -1,5 +1,8 @@
 import streamlit as st
 import nltk
+nltk.download('reuters')
+nltk.download('punkt')
+nltk.download('stopwords')
 from nltk.corpus import reuters, stopwords
 from nltk.tokenize import word_tokenize
 from gensim.models import Word2Vec
