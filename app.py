@@ -1,7 +1,7 @@
 import streamlit as st
 import nltk
 import os
-from nltk.tokenize import word_tokenize
+from gensim.utils import simple_preprocess
 from nltk.corpus import stopwords
 from gensim.models import Word2Vec
 from scipy.spatial.distance import cosine
@@ -13,7 +13,6 @@ os.makedirs(nltk_data_path, exist_ok=True)
 nltk.data.path.append(nltk_data_path)
 
 # Force-download missing NLTK datasets
-nltk.download('punkt', download_dir=nltk_data_path)
 nltk.download('stopwords', download_dir=nltk_data_path)
 
 # Sample corpus (instead of Reuters)
@@ -28,11 +27,11 @@ corpus_sentences = [
 # Train Word2Vec model
 model = Word2Vec(sentences=corpus_sentences, vector_size=100, window=5, min_count=1, workers=4)
 
-# Preprocess text
+# Preprocess text using Gensim's `simple_preprocess()` instead of NLTK
 def preprocess_text(text):
     stop_words = set(stopwords.words('english'))
-    tokens = word_tokenize(text.lower())
-    return [word for word in tokens if word.isalnum() and word not in stop_words]
+    tokens = simple_preprocess(text)  # Replaces word_tokenize()
+    return [word for word in tokens if word not in stop_words]
 
 # Compute average embedding
 def compute_embedding(tokens, word2vec_model):
