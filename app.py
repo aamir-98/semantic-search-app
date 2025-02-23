@@ -6,11 +6,11 @@ from gensim.models import Word2Vec
 from scipy.spatial.distance import cosine
 import numpy as np
 
-# Download necessary datasets
+# Force-download missing NLTK datasets
 nltk.download('punkt')
 nltk.download('stopwords')
 
-# Replace Reuters corpus with a small sample dataset
+# Sample corpus (instead of Reuters)
 corpus_sentences = [
     ["the", "stock", "market", "is", "rising"],
     ["football", "is", "a", "popular", "sport"],
