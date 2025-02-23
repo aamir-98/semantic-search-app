@@ -1,31 +1,26 @@
 import streamlit as st
 import nltk
-nltk.download('reuters')
-nltk.download('punkt')
-nltk.download('punkt_tab')
-nltk.download('stopwords')
-from nltk.corpus import reuters, stopwords
-from nltk.corpus import reuters
-nltk.data.path.append("/tmp")
 from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
 from gensim.models import Word2Vec
 from scipy.spatial.distance import cosine
 import numpy as np
 
 # Download necessary datasets
-nltk.download('reuters')
 nltk.download('punkt')
 nltk.download('stopwords')
 
-# Load and preprocess Reuters corpus
-corpus_sentences = []
-for fileid in reuters.fileids():
-    raw_text = reuters.raw(fileid)
-    tokenized_sentence = [word for word in word_tokenize(raw_text.lower()) if word.isalnum()]
-    corpus_sentences.append(tokenized_sentence)
+# Replace Reuters corpus with a small sample dataset
+corpus_sentences = [
+    ["the", "stock", "market", "is", "rising"],
+    ["football", "is", "a", "popular", "sport"],
+    ["python", "is", "a", "great", "programming", "language"],
+    ["machine", "learning", "is", "a", "subset", "of", "AI"],
+    ["investing", "in", "stocks", "can", "be", "risky"],
+]
 
 # Train Word2Vec model
-model = Word2Vec(sentences=corpus_sentences, vector_size=100, window=5, min_count=5, workers=4)
+model = Word2Vec(sentences=corpus_sentences, vector_size=100, window=5, min_count=1, workers=4)
 
 # Preprocess text
 def preprocess_text(text):
