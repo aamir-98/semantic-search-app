@@ -1,14 +1,20 @@
 import streamlit as st
 import nltk
+import os
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from gensim.models import Word2Vec
 from scipy.spatial.distance import cosine
 import numpy as np
 
+# Manually set NLTK data directory
+nltk_data_path = "/tmp/nltk_data"
+os.makedirs(nltk_data_path, exist_ok=True)
+nltk.data.path.append(nltk_data_path)
+
 # Force-download missing NLTK datasets
-nltk.download('punkt')
-nltk.download('stopwords')
+nltk.download('punkt', download_dir=nltk_data_path)
+nltk.download('stopwords', download_dir=nltk_data_path)
 
 # Sample corpus (instead of Reuters)
 corpus_sentences = [
