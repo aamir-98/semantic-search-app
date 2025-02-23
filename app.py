@@ -2,6 +2,7 @@ import streamlit as st
 import nltk
 nltk.download('reuters')
 nltk.download('punkt')
+nltk.download('punkt_tab')
 nltk.download('stopwords')
 from nltk.corpus import reuters, stopwords
 from nltk.tokenize import word_tokenize
